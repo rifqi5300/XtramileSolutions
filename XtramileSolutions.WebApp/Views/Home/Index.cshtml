@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["country_page"] = "active";
+    ViewData["city_page"] = "";
+    ViewData["weather_page"] = "";
+}
+
+<h2>Manage your countries</h2>
+
+<div>    
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link @ViewData["country_page"]" id="profile" href="/home/index">Countries</a></li>
+                <li class="nav-item"><a class="nav-link @ViewData["city_page"]" id="email" href="/home/cities">Cities</a></li>
+                <li class="nav-item"><a class="nav-link @ViewData["weather_page"]" id="change-password" href="/home/weather">Weather</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h4>Country Lists</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="profile-form" method="post">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Country name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>England</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <input class="form-control" type="tel" data-val="true" data-val-phone="The Phone number field is not a valid phone number." id="Input_PhoneNumber" name="Input.PhoneNumber" value="">
+                        </div>
+                        <button id="update-profile-button" type="submit" class="btn btn-primary">Add new country</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

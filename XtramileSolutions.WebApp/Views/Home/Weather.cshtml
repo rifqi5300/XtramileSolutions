@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["country_page"] = "";
+    ViewData["city_page"] = "";
+    ViewData["weather_page"] = "active";
+}
+
+<h2>Manage your countries</h2>
+
+<div>    
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link @ViewData["country_page"]" id="profile" href="/home/index">Countries</a></li>
+                <li class="nav-item"><a class="nav-link @ViewData["city_page"]" id="email" href="/home/cities">Cities</a></li>
+                <li class="nav-item"><a class="nav-link @ViewData["weather_page"]" id="change-password" href="/home/weather">Weather</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h4>Weather</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="profile-form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <select name="country" id="country" class="form-control">
+                                <option>select country</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="city" id="city" class="form-control">
+                                <option>select city</option>
+                            </select>
+                        </div>
+                        <button id="update-profile-button" type="submit" class="btn btn-primary">Add new city</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
