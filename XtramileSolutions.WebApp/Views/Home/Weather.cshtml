@@ -104,6 +104,7 @@
     
     <script>
         $(document).ready(function(){   
+            var appId = '0b523fac2169124759b14d99cd5bec56';
             
             function setOpenweathermapAPIFields (data){
                 $('#CityName').text(data.name);
@@ -162,7 +163,7 @@
                             $.ajax({
                                 type: 'GET',
                                 url: 'https://api.openweathermap.org/data/2.5/weather',
-                                data:{'q': $('#CityList').val(), 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                                data:{'q': $('#CityList').val(), 'appid': appId},
                                 dataType: 'JSON',
                                 success: function(data){
                                     if(data.cod == '200'){
@@ -203,7 +204,7 @@
                             $.ajax({
                                 type: 'GET',
                                 url: 'https://api.openweathermap.org/data/2.5/weather',
-                                data:{'q': $('#CityList').val(), 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                                data:{'q': $('#CityList').val(), 'appid': appId},
                                 dataType: 'JSON',
                                 success: function(data){
                                     if(data.cod == '200'){
@@ -226,7 +227,7 @@
                 $.ajax({
                     type: 'GET',
                     url: 'https://api.openweathermap.org/data/2.5/weather',
-                    data:{'q': this.value, 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                    data:{'q': this.value, 'appid': appId},
                     dataType: 'JSON',
                     success: function(data){
                         if(data.cod == '200'){
