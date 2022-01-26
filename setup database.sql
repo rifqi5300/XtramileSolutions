@@ -182,8 +182,8 @@ INSERT INTO [dbo].[Cities]
            ([CityName]
            ,[CountryName])
      VALUES
-           ('London'
-           ,'Derry')
+           ('Derry'
+           ,'United Kingdom')
 INSERT INTO [dbo].[Cities]
            ([CityName]
            ,[CountryName])
