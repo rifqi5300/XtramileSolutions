@@ -59,7 +59,6 @@ namespace XtramileUnitTests.Logics
                     CountryName = "Indonesia"
                 });
                 context.SaveChanges();
-                context.SaveChanges();
 
                 CountryLogics countryLogics = new CountryLogics(context);
 

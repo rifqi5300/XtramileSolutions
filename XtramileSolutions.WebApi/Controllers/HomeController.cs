@@ -23,7 +23,12 @@ namespace XtramileSolutions.WebApi.Controllers
         [Route("get-countries")]
         public IActionResult GetCountries()
         {
-            return Ok(_countryLogics.GetAll());
+            var countryList = _countryLogics.GetAll();
+            if (countryList == null)
+            {
+                return NotFound();
+            }
+            return Ok(countryList);
         }
 
         [HttpGet]
