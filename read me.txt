@@ -1,0 +1,6 @@
+read me
+1. open "setup db.sql" edit directory to store *.mdf and *.ldf files
+2. run "setup db.sql" on local sql server to create database and tables and also to insert sampledata to the tables
+3. after database is created, open file "XtramileSolutions.WebApi\appsettings.json" and edit connection string based on local sql server. Do the same to file "XtramileSolutions.WebApp\appsettings.json" 
+4. open file "XtramileSolutions.WebApp\Views\Home\Weather.cshtml" find text "appid" and edit the following appid value with latest appid. you can get latest appid from https://home.openweathermap.org/api_keys you have to register first to that web.
+5. build the solution, right click on XtramileSolutions.WebApp projecct, click View, and choose the browser to open the web app
