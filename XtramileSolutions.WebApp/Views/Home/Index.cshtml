@@ -24,16 +24,13 @@
                 <div class="col-md-6">
                     <form id="profile-form" method="post">
 
-                        <table class="table">
+                        <table class="table" id="TableCountries">
                             <thead>
                                 <tr>
                                     <th scope="col">Country name</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>England</td>
-                                </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
@@ -46,3 +43,23 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $.ajax({
+            type: 'GET',
+                url: 'https://localhost:44305/home/get-countries',
+                data: '',
+                dataType: 'JSON',
+                success: function(data){
+                    $.each(data, function(index, value){
+                        var table_row = $('<tr>', {});
+                        var table_cell = $('<td>', {html: value.countryName});
+                        table_row.append(table_cell);
+                        $('#TableCountries tbody').append(table_row);
+                    })
+                },
+                error: function(data){}
+        });
+    </script>
+}

@@ -8,5 +8,7 @@ namespace XtramileSolutions.Application.Interfaces.Logics
     public interface ICountryLogics
     {
         List<Countries> GetAll();
+
+        string GetCountryNameByCity(string cityName);
     }
 }

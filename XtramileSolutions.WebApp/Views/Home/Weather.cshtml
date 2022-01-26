@@ -1,8 +1,8 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+
+@model XtramileSolutions.WebApp.Controllers.HomeController
 
 
 @{
@@ -32,19 +32,224 @@
                     <form id="profile-form" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <select name="country" id="country" class="form-control">
-                                <option>select country</option>
+                            <label>Country list</label>
+                            <select name="CountryList" id="CountryList" class="form-control">
+                                <option value='0'>select country</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <select name="city" id="city" class="form-control">
+                            <label>City list</label>
+                            <select name="CityList" id="CityList" class="form-control">
                                 <option>select city</option>
                             </select>
                         </div>
-                        <button id="update-profile-button" type="submit" class="btn btn-primary">Add new city</button>
+                       
                     </form>
+
+                    <h4>Openweathermap API</h4>
+
+                    <div class="form-group">
+                        <h5>Location</h5>
+                        <label>City</label>&nbsp;<span class="font-weight-bold" id="CityName"></span><br />
+                        <label>Longitude</label>&nbsp;<span class="font-weight-bold" id="Longitude"></span><br />
+                        <label>Latitude</label>&nbsp;<span class="font-weight-bold" id="Latitude"> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Timezone(Shift in seconds from UTC)</h5>
+                        <span class="font-weight-bold" id="Timezone"></span><br />
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Wind</h5>
+                        <label>Speed</label>&nbsp;<span class="font-weight-bold" id="WindSpeed"> </span><br />
+                        <label>Degrees</label>&nbsp;<span class="font-weight-bold" id="WindDegrees"> </span><br />
+                        <label>Gust</label>&nbsp;<span class="font-weight-bold" id="WindGust"> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Visibility</h5>
+                        <span class="font-weight-bold" id="Visibility"> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Sky condition</h5>
+                        <span class="font-weight-bold" id="WeatherCondition"> </span><br />
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Temperature</h5>
+                        <label>Fahrenheit</label>&nbsp;<span class="font-weight-bold" id="TempFahrenheit"> </span><br />
+                        <label>Celcius</label>&nbsp;<span class="font-weight-bold" id="TempCelcius"> </span><br />
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Relative humidityt</h5>
+                        <span class="font-weight-bold" id="Humidity"> </span>                        
+                    </div>
+
+                    <div class="form-group">
+                        <h5>Presure</h5>
+                        <span class="font-weight-bold" id="Presure"> </span>                        
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    
+    <script>
+        $(document).ready(function(){   
+            
+            function setOpenweathermapAPIFields (data){
+                $('#CityName').text(data.name);
+                $('#Longitude').text(data.coord.lon);
+                $('#Latitude').text(data.coord.lon);
+                $('#Timezone').text(data.timezone);
+                $('#WindSpeed').text(data.wind.speed);
+                $('#WindDegrees').text(data.wind.deg);
+                $('#WindGust').text(data.wind.gust);
+                $('#Visibility').text(data.visibility);
+                $('#WeatherCondition').text(data.weather[0].description);
+                $('#TempFahrenheit').text(data.main.temp);                                        
+                $('#TempCelcius').text(data.main.temp);                                        
+                $('#Humidity').text(data.main.humidity);
+                $('#Presure').text(data.main.pressure);
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:44305/home/get-fahrenheit-to-celcius',
+                    data:{'fahrenheit': data.main.temp},
+                    dataType: 'JSON',
+                    success: function(data){
+                        $('#TempCelcius').text(data.toFixed(2));
+                    },
+                    error: function(data){}
+                });
+            }
+
+
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44305/home/get-countries',
+                data: '',
+                dataType: 'JSON',
+                success: function(data){
+                    $('#CountryList').empty();
+                    $.each(data, function(index, value){
+                        $('#CountryList').append($('<option>',  {
+                            value: value.countryName,
+                            text: value.countryName
+                        }));
+                    });
+                    
+                    $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:44305/home/get-cities-by-country',
+                        data:{'countryName': $('#CountryList').find(':selected').val()},
+                        dataType: 'JSON',
+                        success: function(data){
+                            $('#CityList').empty();
+                            $.each(data, function(index, value){                                
+                                $('#CityList').append($('<option>',  {
+                                    value: value.cityName,
+                                    text: value.cityName
+                                }));
+                            });
+
+                            $.ajax({
+                                type: 'GET',
+                                url: 'https://api.openweathermap.org/data/2.5/weather',
+                                data:{'q': $('#CityList').val(), 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                                dataType: 'JSON',
+                                success: function(data){
+                                    if(data.cod == '200'){
+                                        //city found
+                                        setOpenweathermapAPIFields(data);
+                                    }
+                                    else{
+                                        //city not found
+                                        alert('City was not found');
+
+                                    }
+                                },
+                                error: function(data){}
+                            });
+
+
+
+                        },
+                        error: function(data){}
+                    });
+
+                },
+                error: function(result){                    
+                }
+            });            
+
+            $('#CountryList').change(function(){                
+                 $.ajax({
+                        type: 'GET',
+                        url: 'https://localhost:44305/home/get-cities-by-country',
+                        data:{'countryName': this.value},
+                        dataType: 'JSON',
+                        success: function(data){
+                            $('#CityList').empty();
+                            $.each(data, function(index, value){                                
+                                $('#CityList').append($('<option>',  {
+                                    value: value.cityName,
+                                    text: value.cityName
+                                }));
+                            });
+
+                            $.ajax({
+                                type: 'GET',
+                                url: 'https://api.openweathermap.org/data/2.5/weather',
+                                data:{'q': $('#CityList').val(), 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                                dataType: 'JSON',
+                                success: function(data){
+                                    if(data.cod == '200'){
+                                        //city found
+                                        setOpenweathermapAPIFields(data);
+                                    }
+                                    else{
+                                        //city not found
+                                        alert('City was not found');
+
+                                    }
+                                },
+                                error: function(data){}
+                            });
+
+                        },
+                        error: function(data){}
+                    });                
+            });
+
+            $('#CityList').change(function(){                
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://api.openweathermap.org/data/2.5/weather',
+                    data:{'q': this.value, 'appid': '0b523fac2169124759b14d99cd5bec56'},
+                    dataType: 'JSON',
+                    success: function(data){
+                        if(data.cod == '200'){
+                            //city found
+                            setOpenweathermapAPIFields(data);
+                        }
+                        else{
+                            //city not found
+                            alert('City was not found');
+                        }
+                    },
+                    error: function(data){}
+                });
+            });
+        });
+    </script>
+
+}

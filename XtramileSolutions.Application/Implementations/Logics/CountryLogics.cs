@@ -21,5 +21,10 @@ namespace XtramileSolutions.Application.Implementations.Logics
         {
             return _xtramileSolutionDbContext.Countries.Select(a => new Countries {CountryName = a.CountryName}).ToList();            
         }
+
+        public string GetCountryNameByCity(string cityName)
+        {
+            return _xtramileSolutionDbContext.Cities.Single(x => x.CityName == cityName).CountryName;            
+        }
     }
 }

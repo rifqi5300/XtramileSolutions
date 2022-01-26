@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtramileSolutions.AppDomain", "XtramileSolutions.AppDomain\XtramileSolutions.AppDomain.csproj", "{7BE6E29D-5FE0-4933-82C1-3D6712A4FE0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtramileSolutions.AppDomain", "XtramileSolutions.AppDomain\XtramileSolutions.AppDomain.csproj", "{7BE6E29D-5FE0-4933-82C1-3D6712A4FE0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtramileSolutions.Infrastructure", "XtramileSOlutions.Infrastructure\XtramileSolutions.Infrastructure.csproj", "{ACE21F4F-4F4D-4914-97CD-AA78195237EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtramileSolutions.Infrastructure", "XtramileSOlutions.Infrastructure\XtramileSolutions.Infrastructure.csproj", "{ACE21F4F-4F4D-4914-97CD-AA78195237EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{11E275D3-F880-40B4-B67C-6CB587D9C0B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtramileSolutions.Application", "XtramileSolutions.Application\XtramileSolutions.Application.csproj", "{7D88EFFF-CE53-4282-9433-2FE4ACF0E23B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtramileSolutions.Application", "XtramileSolutions.Application\XtramileSolutions.Application.csproj", "{7D88EFFF-CE53-4282-9433-2FE4ACF0E23B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtramileSolutions.WebApp", "XtramileSolutions.WebApp\XtramileSolutions.WebApp.csproj", "{B8881610-912C-4984-9143-0790F2A17EA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtramileSolutions.WebApp", "XtramileSolutions.WebApp\XtramileSolutions.WebApp.csproj", "{B8881610-912C-4984-9143-0790F2A17EA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtramileSolutions.WebApi", "XtramileSolutions.WebApi\XtramileSolutions.WebApi.csproj", "{1DA4F6BE-B40E-4388-9948-368E13D25F01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtramileSolutions.WebApi", "XtramileSolutions.WebApi\XtramileSolutions.WebApi.csproj", "{1DA4F6BE-B40E-4388-9948-368E13D25F01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

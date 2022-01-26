@@ -14,6 +14,7 @@ namespace XtramileSolutions.Application
         {
             service.AddScoped<ICountryLogics, CountryLogics>();
             service.AddScoped<ICityLogics, CityLogics>();
+            service.AddScoped<IGeneralLogics, GeneralLogics>();
 
             return service;
         }

@@ -1,5 +1,6 @@
 ﻿using XtramileSolutions.Application.Interfaces.Logics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 namespace XtramileSolutions.WebApi.Controllers
 {
@@ -9,11 +10,13 @@ namespace XtramileSolutions.WebApi.Controllers
     {
         private ICountryLogics _countryLogics;
         private ICityLogics _cityLogics;
+        private IGeneralLogics _generalLogics;
 
-        public HomeController(ICountryLogics countryLogics, ICityLogics cityLogics)
+        public HomeController(ICountryLogics countryLogics, ICityLogics cityLogics, IGeneralLogics generalLogics)
         {
             _countryLogics = countryLogics;
             _cityLogics = cityLogics;
+            _generalLogics = generalLogics;
         }
 
         [HttpGet]
@@ -35,6 +38,20 @@ namespace XtramileSolutions.WebApi.Controllers
         public IActionResult GetCitiesByCountry(string countryName)
         {
             return Ok(_cityLogics.GetCitiesByCountryCode(countryName));
+        }
+
+        [HttpGet]
+        [Route("get-countryname-by-city")]
+        public IActionResult GetCountryNameByCity(string cityName)
+        {
+            return Ok(_countryLogics.GetCountryNameByCity(cityName));
+        }
+
+        [HttpGet]
+        [Route("get-fahrenheit-to-celcius")]
+        public IActionResult ConvertFahrenheitToCelcius(double fahrenheit)
+        {
+            return Ok(_generalLogics.ConvertFahrenheitToCelcius(fahrenheit));
         }
 
     }
